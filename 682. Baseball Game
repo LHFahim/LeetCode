@@ -1,0 +1,38 @@
+//https://leetcode.com/problems/baseball-game/
+
+class Solution {
+public:
+    int calPoints(vector<string>& ops) {
+        stack <int> vec;
+        for(auto u : ops){
+            if(u.size() > 1){
+                vec.push(stoi(u));
+            }
+            else if(isdigit(u[0])){
+                vec.push(u[0] - '0');
+            }
+            else if(u[0] == '+'){
+                int num1 = vec.top();
+                vec.pop();
+                int num2 = vec.top();
+                vec.pop();
+                
+                vec.push(num2);
+                vec.push(num1);
+                vec.push(num1+num2);
+            }
+            else if(u[0] == 'D'){
+                vec.push(2 * vec.top());
+            }
+            else{
+                vec.pop();
+            }
+        }
+        long long int  ans = 0;
+        while(!vec.empty()){
+            ans += vec.top();
+            vec.pop();
+        }
+        return ans;
+    }
+};
