@@ -1,0 +1,16 @@
+//https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/submissions/
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        for(int i=1; i<numbers.size(); i++){
+            int first = target - numbers[i];
+            int lb =lower_bound(numbers.begin(),numbers.begin()+i-1,first)- numbers.begin();
+            
+            if(lb <numbers.size() && numbers[lb] == first){
+                return {lb+1, i+1};
+            }
+        }
+        return {-1,-1};
+    }
+};
