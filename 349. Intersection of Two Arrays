@@ -1,0 +1,18 @@
+//https://leetcode.com/problems/intersection-of-two-arrays/
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+        sort(nums2.begin(),nums2.end());
+        vector <int> vec;
+        for(auto u:nums1){
+            if(binary_search(nums2.begin(),nums2.end(),u)){
+                vec.push_back(u);
+            }
+        }
+        sort(vec.begin(),vec.end());
+        int temp = unique(vec.begin(),vec.end()) - vec.begin();
+        while(vec.size()>temp)vec.pop_back();
+        return vec;
+    }
+};
